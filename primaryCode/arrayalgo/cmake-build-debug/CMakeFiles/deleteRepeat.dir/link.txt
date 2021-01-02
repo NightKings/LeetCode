@@ -1,0 +1,3 @@
+"C:\Program Files\JetBrains\CLion 2020.3.1\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\deleteRepeat.dir/objects.a
+D:\env\bin\ar.exe cr CMakeFiles\deleteRepeat.dir/objects.a @CMakeFiles\deleteRepeat.dir\objects1.rsp
+D:\env\bin\gcc.exe -g   -Wl,--whole-archive CMakeFiles\deleteRepeat.dir/objects.a -Wl,--no-whole-archive  -o deleteRepeat.exe -Wl,--out-implib,libdeleteRepeat.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\deleteRepeat.dir\linklibs.rsp
