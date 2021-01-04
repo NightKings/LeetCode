@@ -9,15 +9,15 @@ void rotate(int* nums, int numsSize, int k);
 int* intersect(int* nums1, int nums1Size, int* nums2, int nums2Size, int* returnSize);
 int* plusOne(int* digits, int digitsSize, int* returnSize);
 void moveZeroes(int* nums, int numsSize);
-
+int* twoSum(int* nums, int numsSize, int target, int* returnSize);
 
 int main() {
-    int nums1[]={9,0,7,6,5,0,0,2,1,0};
+    int nums1[]={3,2,4};
     int nums2[]={9,9};
-
-    moveZeroes(nums1,10);
+    int* returnSize = (int*) malloc(sizeof(int));
+    int* a = twoSum(nums1,3,6,returnSize);
     for (int i = 0; i < 10; ++i) {
-        printf("%d",nums1[i]);
+        printf("%d",a[i]);
     }
 }
 //删除排序数组中重复项
@@ -164,6 +164,10 @@ int* plusOne(int* digits, int digitsSize, int* returnSize){
     return plusArray;
 }
 //移动零
+/**
+ * 自己想到覆盖法，是根据第一题的快慢指针法改编，但是这样每个元素都要赋值，时间复杂度较高
+ * 官方解法是交换法，也是快慢指针，可以减少时间复杂度
+ * **/
 void moveZeroes(int* nums, int numsSize){
     int j=0;
     for (int i = 0; i <numsSize; ++i) {
@@ -173,6 +177,26 @@ void moveZeroes(int* nums, int numsSize){
         }
     }
     for (int k = j; k < numsSize; ++k) {
-        nums[j] = 0;
+        nums[k] = 0;
     }
+}
+
+//两数之和
+/**
+ * 暴力搜索或者哈希表
+ * **/
+int* twoSum(int* nums, int numsSize, int target, int* returnSize){
+    for (int i = 0; i < numsSize-1; ++i) {
+        for (int j = i+1; j < numsSize; ++j) {
+            if (nums[i]+nums[j] == target){
+                *returnSize = 2;
+                int * returnArray = (int *) malloc(sizeof(int)*2);
+                returnArray[0] = i;
+                returnArray[1] = j;
+                return returnArray;
+            }
+        }
+    }
+    *returnSize = 0;
+    return NULL;
 }
