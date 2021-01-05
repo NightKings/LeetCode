@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <math.h>
 
+
+
 int removeDuplicates(int* nums, int numsSize);
 int maxProfit(int* prices, int pricesSize);
 void rotate(int* nums, int numsSize, int k);
@@ -10,15 +12,25 @@ int* intersect(int* nums1, int nums1Size, int* nums2, int nums2Size, int* return
 int* plusOne(int* digits, int digitsSize, int* returnSize);
 void moveZeroes(int* nums, int numsSize);
 int* twoSum(int* nums, int numsSize, int target, int* returnSize);
+bool isValidSudoku(char** board, int boardSize, int* boardColSize);
+void test (char** cc){
+    printf("%c",cc[0][0]);
+}
 
 int main() {
     int nums1[]={3,2,4};
     int nums2[]={9,9};
     int* returnSize = (int*) malloc(sizeof(int));
-    int* a = twoSum(nums1,3,6,returnSize);
-    for (int i = 0; i < 10; ++i) {
-        printf("%d",a[i]);
-    }
+//    int* a = twoSum(nums1,3,6,returnSize);
+//    for (int i = 0; i < 10; ++i) {
+//        printf("%d",a[i]);
+//    }
+
+
+    char cc[9][9] = {{'.','.','4','.','.','.','6','3','.'},{'.','.','.','.','.','.','.','.','.'},{'5','.','.','.','.','.','.','9','.'},{'.','.','.','5','6','.','.','.','.'},{'4','.','3','.','.','.','.','.','1'},{'.','.','.','7','.','.','.','.','.'},{'.','.','.','5','.','.','.','.','.'},{'.','.','.','.','.','.','.','.','.'},{'.','.','.','.','.','.','.','.','.'}};
+
+    //    isValidSudoku((char **) cc, 9, (int *) 9);
+    test((char **) cc);
 }
 //删除排序数组中重复项
 /**
@@ -199,4 +211,39 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize){
     }
     *returnSize = 0;
     return NULL;
+}
+//有效的数独
+bool isValidSudoku(char** board, int boardSize, int* boardColSize){
+    for (int i = 0; i < boardSize; ++i) {
+        int rowCount[9] = {0};
+        for (int j = 0; j < boardSize; ++j) {
+            if (board[i][j] != '.'){
+                if (rowCount[j] == 1) return false;
+                else{
+                    rowCount[j] = 1;
+                }
+            }
+        }
+        int colCount[9] = {0};
+        for (int k = 0; k < boardSize; ++k) {
+            if (board[k][i] != '.'){
+                if (colCount[k] == 1) return false;
+                else colCount[k] = 1;
+            }
+        }
+        int boxCount[10] = {0};
+        int boxC = (i%3) * 3;
+        int boxR = (i/3) * 3;
+        for (int j = boxC; j < boxC + 3; ++j) {
+
+            for (int k = boxR; k < boxR + 3; ++k) {
+                if (board[j][k] != '.'){
+                    if(boxCount[board[j][k]-'0'] != 0) return false;
+                    else boxCount[board[j][k]-'0'] = 1;
+                }
+            }
+        }
+
+    }
+    return true;
 }
